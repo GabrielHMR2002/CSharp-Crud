@@ -1,6 +1,10 @@
 ﻿namespace WebApp.Domain.Enums
 {
-    public class Class
+    public enum ShiftEnum
     {
+        Morning,
+        Afternoon,
+        Night
     }
+
 }
