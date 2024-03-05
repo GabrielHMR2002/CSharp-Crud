@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using WebApp.DataContext;
+using WebApp.Services.EmployeeService;
 
 namespace WebApp
 {
@@ -26,6 +27,10 @@ namespace WebApp
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //IEmployeeInterface se referencia a classe EmployeeService
+            //Quando eu fizer uma injeção de dependencia da interface IEmployeeInterface eu quero que seja utilizado os metodos que estao na IEmployeeService
+            builder.Services.AddScoped<IEmployeeInterface, EmployeeService>(); //IEmployeeInterface se comunica com o EmployeeService
+
 
             var app = builder.Build();
 
@@ -39,6 +44,8 @@ namespace WebApp
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+
 
 
             app.MapControllers();
